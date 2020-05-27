@@ -1,0 +1,85 @@
+#menu{
+	background-color: #4e9a06;
+}
+
+nav a{
+	
+    font-weight: 400;
+    font-size: 18px;
+    color: white;
+    padding: 15px;
+}
+nav a:hover{
+	color: yellow;
+}
+div ul li a{
+   
+    font-weight: 400;
+    font-size: 18px;
+    color: white;
+    padding: 15px;
+}
+ div ul li a:hover{
+    
+    color: yellow;
+}
+
+.table-container{
+	width:95%;
+	margin: 20px 20px 10px 45px;
+}
+
+#country12{
+	background-color: #4e9a06;
+}
+
+h3{
+	text-align:center;
+}
+.carousel-inner img {
+      width: 100%;
+      height: 670px;
+  }
+  
+  
+  
+.footer-icon {
+    cursor: pointer;
+    background-color: #b4e0a2;
+    color: white;
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    margin-top: 1%;
+     margin-bottom: 1%;
+    margin-right: 20px;
+    text-align: center;
+}
+
+.fb:hover {
+    background-color: #4F689E;
+}
+
+.tb:hover {
+    background-color: #74C7D5;
+}
+
+.gl:hover {
+    background-color: #DF5C64;
+}
+
+.ln:hover {
+    background-color: #3E61AF;
+}
+.footer{
+	background-color: #4e9a06;
+}
+.footer-icon i {
+    margin-top: 17px;
+    font-size: 14px;
+}
+
+.footer .row {
+    margin-left: 39%;
+}
+  
