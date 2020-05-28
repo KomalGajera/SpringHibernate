@@ -17,7 +17,7 @@ import spring.hibernate.entitymodel.Address;
 public class UserAddressDaoImpl implements UserAddressDao {
 	
 	
-	private static final Logger logger = Logger.getLogger(UserAddressDaoImpl.class);
+	private static final Logger LOGGER = Logger.getLogger(UserAddressDaoImpl.class);
 	
 	@Autowired
     private SessionFactory sessionFactory;
@@ -30,17 +30,17 @@ public class UserAddressDaoImpl implements UserAddressDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public String[] deleteAddress(Address a) {
+	public String[] deleteAddress(Address add) {
 		// TODO Auto-generated method stub
-		String address[]=a.getUser().getAdd();
+		String address[]=add.getUser().getAdd();
 		List<String> oldaddress=new ArrayList<String>(); 
 		List<String> newaddress=new ArrayList<String>();
-		Query q = getSession().createQuery("SELECT a.Address FROM Address a WHERE user_id=:user_id");
-		q.setParameter("user_id", a.getUser().getId());
-		oldaddress= (List<String>) q.list();
+		Query query = getSession().createQuery("SELECT a.Address FROM Address a WHERE user_id=:user_id");
+		query.setParameter("user_id", add.getUser().getId());
+		oldaddress= (List<String>) query.list();
 		
-		for (int i = 0; i < address.length;  i++) {
-			newaddress.add(address[i]);				
+		for (int count = 0; count < address.length;  count++) {
+			newaddress.add(address[count]);				
 		}
 		  List<String> oldaddress1=new ArrayList<String>(oldaddress); 
     	  oldaddress.removeAll(newaddress); 
@@ -49,43 +49,43 @@ public class UserAddressDaoImpl implements UserAddressDao {
     	int oldsize=oldaddress.size();
     	int newsize=newaddress.size();
     	
-    	logger.info("remaining old address size  ::::"+oldaddress.size());
-		logger.info("remaining new address size  ::::"+newaddress.size());
+    	LOGGER.info("remaining old address size  ::::"+oldaddress.size());
+		LOGGER.info("remaining new address size  ::::"+newaddress.size());
     	
     	while(oldsize!=0 && newsize!=0) {
     		String old=oldaddress.get(0);
-    		String New=newaddress.get(0);
-    		logger.info("\n\n\n\n update time");
+    		String newadd=newaddress.get(0);
+    		LOGGER.info("\n\n\n\n update time");
     		Query find = getSession().createQuery("SELECT a.id FROM Address a WHERE a.Address = :address and user_id=:user_id ");
 			find.setParameter("address", old);
-			find.setParameter("user_id",a.getUser().getId());
-			int id=(int) find.list().get(0);
+			find.setParameter("user_id",add.getUser().getId());
+			int addressid=(int) find.list().get(0);
 			Query update = getSession().createQuery("update Address a set a.Address=:address where a.id=:id");
-			update.setParameter("address", New);
-			update.setParameter("id", id);
+			update.setParameter("address", newadd);
+			update.setParameter("id", addressid);
 			update.executeUpdate();
 			oldaddress.remove(0);newaddress.remove(0);
-			logger.info("remaining old address::::"+oldaddress.size());
-			logger.info("remaining new address::::"+newaddress.size());
+			LOGGER.info("remaining old address::::"+oldaddress.size());
+			LOGGER.info("remaining new address::::"+newaddress.size());
 			newsize--;oldsize--;
     		
     		
     	}
 
 		for (String s : oldaddress) {
-			  logger.info("\n\n\n delete records is:"+s);
-			  Query q1 = getSession().createQuery("from Address where Address = :address and user_id=:user_id ");
-			  q1.setParameter("address", s);
-			  q1.setParameter("user_id", a.getUser().getId());
-			  Address oldadd=(Address) q1.list().get(0);			  
+			  LOGGER.info("\n\n\n delete records is:"+s);
+			  Query query1 = getSession().createQuery("from Address where Address = :address and user_id=:user_id ");
+			  query1.setParameter("address", s);
+			  query1.setParameter("user_id", add.getUser().getId());
+			  Address oldadd=(Address) query1.list().get(0);			  
 			  getSession().delete(oldadd);}
 		
 		String arr[]=new String[newaddress.size()];
-		int i=0;
+		int count=0;
 		for (String s1 : newaddress) {
-			logger.info("\n\n\n\ninsert records:::"+s1);
-			  arr[i]=s1;
-			  i++;}
+			LOGGER.info("\n\n\n\ninsert records:::"+s1);
+			  arr[count]=s1;
+			  count++;}
 		return arr;
 	}
 

@@ -11,9 +11,9 @@ public interface UserService {
 	 
     public List<User> getAllUser();
  
-    public void deleteUser(int userid); 
+    public int deleteUser(int userid); 
 
-	public User getUserById(int id);
+	public User getUserById(int userid);
 
 	public int changepassword(User user);
 

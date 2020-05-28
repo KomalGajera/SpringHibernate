@@ -1,5 +1,6 @@
 package spring.hibernate.entitymodel;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -61,6 +62,22 @@ public class User {
 	@Pattern(regexp="^([a-zA-Z0-9@*#]{8,15})$",message = "enter only character")
 	private String  password;
 	
+	@Transient
+	@PastOrPresent(message = "not future date allow..")
+	private Date date;
+	
+	public Date getDate() {
+		return date;
+	}
+
+
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+
+
 	@Column(name = "dob", nullable = false)
 	//@PastOrPresent(message = "not future date allow..")
 	private String dob;

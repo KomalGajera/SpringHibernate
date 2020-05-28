@@ -13,16 +13,16 @@ import spring.hibernate.entitymodel.Address;
 public class UserAddressServiceImpl implements UserAddressService {
 	
 	
-	private static final Logger logger = Logger.getLogger(UserAddressServiceImpl.class);
+	private static final Logger LOGGER = Logger.getLogger(UserAddressServiceImpl.class);
 	
 	@Autowired
     private UserAddressDao dao;
 
 	@Override
-	public String[] deleteAddress(Address a) {
+	public String[] deleteAddress(Address address) {
 		
 		// TODO Auto-generated method stub
-		return dao.deleteAddress(a);
+		return dao.deleteAddress(address);
 	}
 
 }

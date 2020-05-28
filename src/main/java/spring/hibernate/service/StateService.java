@@ -9,7 +9,7 @@ public interface StateService {
 	 
     public List<State> getAllState();
  
-    public void deleteState(int stateId);
+    public int deleteState(int stateId);
  
     public State getState(int stateid);
 

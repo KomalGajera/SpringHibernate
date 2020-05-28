@@ -5,7 +5,7 @@ import spring.hibernate.entitymodel.User;
 
 public interface UserAddressService {
 	
-	 public String[] deleteAddress(Address a);
+	 public String[] deleteAddress(Address address);
 		
 
 }

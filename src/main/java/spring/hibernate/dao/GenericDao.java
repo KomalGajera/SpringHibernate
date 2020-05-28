@@ -5,14 +5,14 @@ import java.util.List;
 public interface GenericDao<T> {
 	
 
-	    int save(T t);
+	    int save(T classname);
 
-	    void delete(Class<T> cls, int id);
+	    int delete(Class<T> cls, int classid);
 	    
-	    public T getbyid(Class<T> cls, int id);
+	    public T getbyid(Class<T> cls, int classid);
 
 	    public List< T > findAll(Class<T> cls);
 
-	    int update(T t);  
+	    int update(T classname);  
 
 }

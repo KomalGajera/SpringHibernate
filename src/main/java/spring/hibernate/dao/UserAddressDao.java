@@ -10,6 +10,6 @@ import spring.hibernate.entitymodel.User;
 @Transactional
 public interface UserAddressDao {
 
-	public String[] deleteAddress(Address a);
+	public String[] deleteAddress(Address address);
 
 }

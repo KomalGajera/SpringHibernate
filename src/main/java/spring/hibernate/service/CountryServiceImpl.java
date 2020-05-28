@@ -14,7 +14,7 @@ import spring.hibernate.entitymodel.Country;
 @Transactional
 public class CountryServiceImpl implements CountryService {
 
-	private static final Logger logger = Logger.getLogger(CountryServiceImpl.class);
+	private static final Logger LOGGER = Logger.getLogger(CountryServiceImpl.class);
 	
 	@Autowired
     private CountryDao dao;
@@ -42,9 +42,9 @@ public class CountryServiceImpl implements CountryService {
 	}
 
 	@Override
-	public void deleteCountry(int country_id) {
+	public int deleteCountry(int countryid) {
 		// TODO Auto-generated method stub	
-		dao.delete(Country.class,country_id);
+		return dao.delete(Country.class,countryid);
 	}
 
 	@Override

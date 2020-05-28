@@ -15,7 +15,7 @@ import spring.hibernate.entitymodel.State;
 public class StateServiceImpl implements StateService {
 
 	
-	private static final Logger logger = Logger.getLogger(StateServiceImpl.class);
+	private static final Logger LOGGER = Logger.getLogger(StateServiceImpl.class);
 	
 	@Autowired
 	StateDao dao;
@@ -41,9 +41,9 @@ public class StateServiceImpl implements StateService {
 	}
 
 	@Override
-	public void deleteState(int stateId) {
+	public int deleteState(int stateId) {
 		// TODO Auto-generated method stub
-		dao.delete(State.class, stateId);
+		return dao.delete(State.class, stateId);
 	}
 
 

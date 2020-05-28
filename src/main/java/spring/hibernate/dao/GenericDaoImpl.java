@@ -3,7 +3,6 @@ package spring.hibernate.dao;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -21,7 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @SuppressWarnings("unchecked")
 public class GenericDaoImpl<T> implements GenericDao<T> {
 	
-	private static final Logger logger = Logger.getLogger(GenericDaoImpl.class);
+	private static final Logger LOGGER = Logger.getLogger(GenericDaoImpl.class);
 	
 	@Autowired
     private SessionFactory sessionFactory;
@@ -37,13 +36,13 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 	    * @param T is use it contain T information.
 	 */ 
     @Override
-    public int save(final T t) {
+    public int save(final T classname) {
     	int status=0;
     	try {
-    	 	status=(int) getSession().save(t);
+    	 	status=(int) getSession().save(classname);
     		   } catch (RuntimeException e) {
     		      
-    		      logger.error("error while save  data to database.."+e);
+    		      LOGGER.error("error while save  data to database.."+e);
     		   
     		}       
 		return status;
@@ -55,15 +54,15 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 	 */
 	public List< T > findAll(Class<T> cls){
 		@SuppressWarnings("rawtypes")
-		Query q = null;
+		Query query = null;
     	try {
-    		 q = getSession().createQuery("from "+cls.getName() );
+    		 query = getSession().createQuery("from "+cls.getName() );
     		   } catch (RuntimeException e) {
     		      
-    		      logger.error("error while fetch data from database.."+e);
+    		      LOGGER.error("error while fetch data from database.."+e);
     		   
     		}
-		return (List<T>) q.list();      
+		return (List<T>) query.list();      
 		
       
      }
@@ -73,14 +72,14 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 	    * @param T is use it contain T information.
 	 */
     @Override
-    public int update(final T t) {
+    public int update(final T classname) {
     	
     	int status=0;
     	try {
-    	 	 getSession().update(t);
+    	 	 getSession().update(classname);
     	 	 status=1;
     		   } catch (RuntimeException e) {    		      
-    		      logger.error("error while update  data to database.."+e);    		   
+    		      LOGGER.error("error while update  data to database.."+e);    		   
     		}     
 		return status;
     	    
@@ -93,17 +92,17 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 	    * @param id is use it contain T'id information.
 	 */
 	@Override
-	public T getbyid(Class<T> cls, int id) {
-		T t = null;
+	public T getbyid(Class<T> cls, int classid) {
+		T classname = null;
 		try {
-			t=getSession().get(cls, id);
+			classname=getSession().get(cls, classid);
    		   } catch (RuntimeException e) {  
    			   
-   		      logger.error("error while fetch  data by id to database.."+e);  
+   		      LOGGER.error("error while fetch  data by id to database.."+e);  
    		      
    		      
    		}     		
-	    return t;
+	    return classname;
 	}
 
 
@@ -113,17 +112,19 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 	    * @param id is use it contain T'id information.
 	 */
 	@Override
-	public void delete(Class<T> cls, int id) {
+	public int delete(Class<T> cls, int classid) {
 		// TODO Auto-generated method stub
-		
+		int status=0;
 		try {
-			T t=getSession().load(cls, id);
-			getSession().delete(t);
+			T classname=getSession().load(cls, classid);
+			getSession().delete(classname);
+			status=1;
    		   } catch (RuntimeException e) {  
    			   
-   		      logger.error("error while fetch  data by id to database.."+e);     		      
+   		      LOGGER.error("error while fetch  data by id to database.."+e);     		      
    		      
-   		}     		
+   		}     
+		return status;
 		
 		
 	}

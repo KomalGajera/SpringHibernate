@@ -7,6 +7,11 @@ $(document).ready(function() {
         type: "GET",
         contentType : "application/json",
         success: function (data) {
+        	
+        	if(!data){
+        		alert("sorry there is error of display user..")
+        		
+        	}else{
             table.empty();
             $.each(data, function (key, value) {
             	
@@ -49,6 +54,7 @@ $(document).ready(function() {
             	
             });    
             $("#example").DataTable();
+        	}
         },
         error: function(data) {
             alert('woops!');

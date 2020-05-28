@@ -21,7 +21,7 @@ import spring.hibernate.entitymodel.User;
 @SuppressWarnings("rawtypes")
 public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 	
-	private static final Logger logger = Logger.getLogger(UserDaoImpl.class);
+	private static final Logger LOGGER = Logger.getLogger(UserDaoImpl.class);
 	
 	@Autowired
     private SessionFactory sessionFactory;
@@ -42,12 +42,12 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 		
 		int status=0;
     	try {
-    		Query q = getSession().createQuery("update User u set u.password=:password where u.email=:email");
-    		q.setParameter("password", user.getPassword());
-    		q.setParameter("email", user.getEmail());
-    		status = q.executeUpdate();
+    		Query query = getSession().createQuery("update User u set u.password=:password where u.email=:email");
+    		query.setParameter("password", user.getPassword());
+    		query.setParameter("email", user.getEmail());
+    		status = query.executeUpdate();
     		   } catch (RuntimeException e) {    		      
-    		      logger.error("error while change password data to database.."+e);    		   
+    		      LOGGER.error("error while change password data to database.."+e);    		   
     		}       
 		return status;
 		
@@ -61,15 +61,15 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 	@Override
 	public User findUser(User user) {
 		// TODO Auto-generated method stub
-		Query q =null;
+		Query query =null;
     	try {
-    		q= getSession().createQuery("from User where email=:email and password=:password");
-    		q.setParameter("email", user.getEmail());
-    		q.setParameter("password", user.getPassword());
+    		query= getSession().createQuery("from User where email=:email and password=:password");
+    		query.setParameter("email", user.getEmail());
+    		query.setParameter("password", user.getPassword());
     		   } catch (RuntimeException e) {    		      
-    		      logger.error("error while update  data to database.."+e);    		   
+    		      LOGGER.error("error while update  data to database.."+e);    		   
     		}       
-		return (User) q.uniqueResult();
+		return (User) query.uniqueResult();
 		 
 	}
 

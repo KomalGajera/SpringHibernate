@@ -29,7 +29,7 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 public class ThymeleafConfiguration implements WebMvcConfigurer  {
 	
 	   @Autowired
-	   private ApplicationContext applicationContext;
+	   private ApplicationContext application;
 	   
 
 	   /*
@@ -38,7 +38,7 @@ public class ThymeleafConfiguration implements WebMvcConfigurer  {
 	   @Bean
 	   public SpringResourceTemplateResolver templateResolver() {
 	      SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
-	      templateResolver.setApplicationContext(applicationContext);
+	      templateResolver.setApplicationContext(application);
 	      templateResolver.setOrder(0);
 	      templateResolver.setPrefix("/WEB-INF/views/");
 	      templateResolver.setSuffix(".html");

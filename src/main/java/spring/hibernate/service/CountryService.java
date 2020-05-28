@@ -10,9 +10,9 @@ public interface CountryService {
 	 
     public List<Country> getAllCountry();
  
-    public void deleteCountry(int country_id);    
+    public int deleteCountry(int countryid);    
  
-    public Country getCountry(int id);
+    public Country getCountry(int countryid);
     
     public Country getCountryByName(String countryname);
 

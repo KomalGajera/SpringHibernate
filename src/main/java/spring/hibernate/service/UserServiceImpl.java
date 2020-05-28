@@ -17,7 +17,7 @@ import spring.hibernate.entitymodel.User;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-	private static final Logger logger = Logger.getLogger(UserServiceImpl.class);
+	private static final Logger LOGGER = Logger.getLogger(UserServiceImpl.class);
 	
 	@Autowired
     private UserDao dao;
@@ -26,16 +26,13 @@ public class UserServiceImpl implements UserService {
 	public int save(User user) {
 		// TODO Auto-generated method stub
 		
-		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-		 try {
-	            Date date = formatter.parse(user.getDob());
-	            formatter.applyPattern("yyyy-MM-dd");
-	            user.setDob(formatter.format(date));
-
-	        } catch (ParseException e) {
-	            e.printStackTrace();
-	        }
-		 
+		/*
+		 * SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy"); try { Date
+		 * date = formatter.parse(user.getDob()); formatter.applyPattern("yyyy-MM-dd");
+		 * user.setDob(formatter.format(date));
+		 * 
+		 * } catch (ParseException e) { e.printStackTrace(); }
+		 */
 			if(user.getId()==0) {				 
 				return dao.save(user);
 			}else {
@@ -53,27 +50,27 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void deleteUser(int userid) {
+	public int deleteUser(int userid) {
 		// TODO Auto-generated method stub
-		dao.delete(User.class,userid);
+		 return dao.delete(User.class,userid);
 	}
 
 
 
 	@Override
-	public User getUserById(int id) {
+	public User getUserById(int userid) {
 		// TODO Auto-generated method stub
-		User u=dao.getbyid(User.class, id);
+		User user=dao.getbyid(User.class, userid);
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		 try {
-	            Date date = formatter.parse(u.getDob());
+	            Date date = formatter.parse(user.getDob());
 	            formatter.applyPattern("dd/MM/yyyy");
-	            u.setDob(formatter.format(date));
+	            user.setDob(formatter.format(date));
 
 	        } catch (ParseException e) {
 	            e.printStackTrace();
 	        }		
-		return u;
+		return user;
 	}
 
 	@Override

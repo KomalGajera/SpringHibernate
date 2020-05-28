@@ -23,7 +23,7 @@ import spring.hibernate.entitymodel.State;
 @SuppressWarnings("rawtypes")
 public class StateDaoImpl extends GenericDaoImpl<State> implements StateDao {
 	
-	private static final Logger logger = Logger.getLogger(StateDaoImpl.class);
+	private static final Logger LOGGER = Logger.getLogger(StateDaoImpl.class);
 	
 	@Autowired
     private SessionFactory sessionFactory;
@@ -43,15 +43,15 @@ public class StateDaoImpl extends GenericDaoImpl<State> implements StateDao {
 		// TODO Auto-generated method stub
 		
 		
-		Query q=null;
+		Query query=null;
     	try {
-    		q = getSession().createQuery("from State where country_id = :country_id ");
-    		q.setParameter("country_id", state.getCountry().getCountry_id());	
+    		query = getSession().createQuery("from State where country_id = :country_id ");
+    		query.setParameter("country_id", state.getCountry().getCountry_id());	
     		   } catch (RuntimeException e) {    		      
-    		      logger.error("error while fetch country by state  data from database.."+e);    		   
+    		      LOGGER.error("error while fetch country by state  data from database.."+e);    		   
     		} 	
 		
-		return (List<State>) q.list();
+		return (List<State>) query.list();
 	}
 
 }

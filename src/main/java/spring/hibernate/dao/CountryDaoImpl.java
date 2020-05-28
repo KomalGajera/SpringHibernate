@@ -24,7 +24,7 @@ import spring.hibernate.entitymodel.Country;
 @SuppressWarnings("rawtypes")
 public class CountryDaoImpl extends GenericDaoImpl<Country> implements CountryDao {
 
-	private static final Logger logger = Logger.getLogger(CountryDaoImpl.class);
+	private static final Logger LOGGER = Logger.getLogger(CountryDaoImpl.class);
 	
 	@Autowired
     private SessionFactory sessionFactory;
@@ -42,16 +42,16 @@ public class CountryDaoImpl extends GenericDaoImpl<Country> implements CountryDa
 	public Country getCountryByName(String countryname) {
 		// TODO Auto-generated method stub
 		
-		Query q=null;
+		Query query=null;
     	try {
-    		q = getSession().createQuery("from Country where country_name = :country_name ");
-    		q.setParameter("country_name", countryname);
+    		query = getSession().createQuery("from Country where country_name = :country_name ");
+    		query.setParameter("country_name", countryname);
     	
     		   } catch (RuntimeException e) {    		      
-    		      logger.error("error while get country by countryname from database.."+e);    		   
+    		      LOGGER.error("error while get country by countryname from database.."+e);    		   
     		}
 		
-		return (Country)q.list().get(0);
+		return (Country)query.list().get(0);
 	}
 
 

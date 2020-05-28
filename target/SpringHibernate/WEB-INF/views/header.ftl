@@ -1,17 +1,4 @@
-<#-- <%@page  isELIgnored="false" %>    
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%
-response.setHeader("Cache-Control","no-cache");
-response.setHeader("Cache-Control","no-store");
-response.setHeader("Pragma","no-cache");
-response.setDateHeader ("Expires", 0);
-
-if(session.getAttribute("username")==null)
-    response.sendRedirect("Login.jsp");
-%> -->
-  <meta http-equiv='cache-control' content='no-cache'>
+ <meta http-equiv='cache-control' content='no-cache'>
 <meta http-equiv='expires' content='0'>
 <meta http-equiv='pragma' content='no-cache'>  
  <link rel="stylesheet" href="resources/css/font-awesome.min.css">
@@ -20,41 +7,31 @@ if(session.getAttribute("username")==null)
      	  function disableBack() { window.history.forward() }
           window.onload = disableBack();
           window.onpageshow = function(evt) { if (evt.persisted) disableBack() }
-	    </script>
- 
-<#--  <#if session.getAttribute("username")??>
-
-    <#assign myDataFromFtl = session.getAttribute("username")>
-
-</#if>
-
-
-
-<#if myDataFromFtl??>${myDataFromFtl}<#else>myDataFromFtl is empty</#if> -->
-
-<nav class="navbar navbar-expand-lg" id="menu">
-<#if Session.user?exists>
-<input id="user"  type="hidden" name="user" value="${Session.user}">    
-<#else>
-<input id="user"  type="hidden" name="user" value="0"> 
-</#if>
-
-<#if Session.userid?exists>
-<input id="userid" type="hidden" name="userid" value="${Session.userid}">   
-<#else>
-		<script type="text/javascript">
-		    window.location.href = "http://localhost:8080/SpringHibernate/";
-		</script> 
-</#if>
-
-<#if Session.username??>
-<a class="navbar-brand" href="#">welcome:${username}</a>  
-<#else>
-		<script type="text/javascript">
-		    window.location.href = "http://localhost:8080/SpringHibernate/";
-		</script>
-
-</#if>
+	 </script>
+		
+		<nav class="navbar navbar-expand-lg" id="menu">
+		<#if Session.user?exists>
+		<input id="user"  type="hidden" name="user" value="${Session.user}">    
+		<#else>
+		<input id="user"  type="hidden" name="user" value="0"> 
+		</#if>
+		
+		<#if Session.userid?exists>
+		<input id="userid" type="hidden" name="userid" value="${Session.userid}">   
+		<#else>
+				<script type="text/javascript">
+				    window.location.href = "http://localhost:8080/SpringHibernate/";
+				</script> 
+		</#if>
+		
+		<#if Session.username?exists>
+		<a class="navbar-brand" href="#">welcome:${username}</a>  
+		<#else>
+				<script type="text/javascript">
+				    window.location.href = "http://localhost:8080/SpringHibernate/";
+				</script>
+		
+		</#if>
 
 
 

@@ -7,16 +7,25 @@ $(document).ready(function() {
         type : "GET",
 		contentType : "application/json",
         success: function (data) {
-            table.empty();
-            $.each(data, function (key, value) {
-            	
-            	
-                table.append("<tr><td>"+value.country_id+"</td>" +
-                    "<td>"+value.country_name+"</td>"+
-                    "<td><a href='#' onClick='$(this).update("+value.country_id+")'>update</a></td>"+
-                    "<td><a href='#' onClick='$(this).deletecountry("+value.country_id+")'>delete</a></td></tr>");
-            }); 
-            $("#example").DataTable();
+        	
+        	if(!data){
+        		alert("sorry there is error of display country..")
+        		
+        	}
+        	else{
+        		table.empty();
+                $.each(data, function (key, value) {
+                	
+                	
+                    table.append("<tr><td>"+value.country_id+"</td>" +
+                        "<td>"+value.country_name+"</td>"+
+                        "<td><a href='#' onClick='$(this).update("+value.country_id+")'>update</a></td>"+
+                        "<td><a href='#' onClick='$(this).deletecountry("+value.country_id+")'>delete</a></td></tr>");
+                }); 
+                $("#example").DataTable();
+        		
+        	}
+           
     }
     }); 
 
