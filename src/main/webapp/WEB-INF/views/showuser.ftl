@@ -14,6 +14,7 @@
 <#include "header.ftl">
 
 <div class='table-container'>
+  <h1 class="error">  <#if Delete?exists>  ${Delete}  </#if>  </h1>
    <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>

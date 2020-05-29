@@ -6,7 +6,7 @@
         success: function(list){      	        	
             var select = $('#country');           
               $.each(list, function(index, value) {
-              $('<option>').val(value['country_name']).text(value['country_name']).appendTo(select);
+              $('<option>').val(value['countryName']).text(value['countryName']).appendTo(select);
           });
         },
         error: function(data) {
@@ -502,7 +502,7 @@
 	    	            var select = $('#state');
 	    	             select.find('option').remove();
 	    	              $.each(list, function(index, value) {
-	    	              $('<option>').val(value['state_name']).text(value['state_name']).appendTo(select);
+	    	              $('<option>').val(value['stateName']).text(value['stateName']).appendTo(select);
 	    	          });
 	    	        },
 	    	        error: function(data) {

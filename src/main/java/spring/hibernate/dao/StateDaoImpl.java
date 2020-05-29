@@ -46,7 +46,7 @@ public class StateDaoImpl extends GenericDaoImpl<State> implements StateDao {
 		Query query=null;
     	try {
     		query = getSession().createQuery("from State where country_id = :country_id ");
-    		query.setParameter("country_id", state.getCountry().getCountry_id());	
+    		query.setParameter("country_id", state.getCountry().getCountryId());	
     		   } catch (RuntimeException e) {    		      
     		      LOGGER.error("error while fetch country by state  data from database.."+e);    		   
     		} 	

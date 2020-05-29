@@ -2,21 +2,21 @@ package spring.hibernate.service;
 
 import java.util.List;
 
-import spring.hibernate.entitymodel.User;
+import spring.hibernate.entitymodel.Users;
 
 
 public interface UserService {
 	
-	public int save(User user);
+	int save(Users user);
 	 
-    public List<User> getAllUser();
+    List<Users> getAllUser();
  
-    public int deleteUser(int userid); 
+    int deleteUser(int userid); 
 
-	public User getUserById(int userid);
+	Users getUserById(int userid);
 
-	public int changepassword(User user);
+	int changepassword(Users user);
 
-	public User findUser(User user);
+	Users findUser(Users user);
 
 }

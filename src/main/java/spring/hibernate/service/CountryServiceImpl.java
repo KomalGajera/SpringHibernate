@@ -23,7 +23,8 @@ public class CountryServiceImpl implements CountryService {
 	@Override
 	public int save(Country country) {
 		// TODO Auto-generated method stub
-		if(country.getCountry_id()==0)
+		LOGGER.info("save method is in progress...");
+		if(country.getCountryId()==0)
 		{
 			int status=dao.save(country);
 			return status;
@@ -38,18 +39,21 @@ public class CountryServiceImpl implements CountryService {
 	@Override
 	public List<Country> getAllCountry() {
 		// TODO Auto-generated method stub
+		LOGGER.info("country retrive method in progress..");
 		return dao.findAll(Country.class);
 	}
 
 	@Override
 	public int deleteCountry(int countryid) {
 		// TODO Auto-generated method stub	
+		LOGGER.info("country delete method in progress..");
 		return dao.delete(Country.class,countryid);
 	}
 
 	@Override
 	public Country getCountry(int countryid) {
 		// TODO Auto-generated method stub]		
+		LOGGER.info("country retrive by id is in progress");
 		return dao.getbyid(Country.class,countryid);
 		//return dao.getCountry(countryid);
 	}
@@ -57,6 +61,7 @@ public class CountryServiceImpl implements CountryService {
 	@Override
 	public Country getCountryByName(String countryname) {
 		// TODO Auto-generated method stub
+		LOGGER.info("find country by country name...");
 		return dao.getCountryByName(countryname);
 	}
 

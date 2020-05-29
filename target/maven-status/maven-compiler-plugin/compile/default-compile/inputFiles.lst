@@ -6,12 +6,11 @@
 /home/inex3/eclipse-workspace/SpringHibernate/src/main/java/spring/hibernate/dao/CountryDaoImpl.java
 /home/inex3/eclipse-workspace/SpringHibernate/src/main/java/spring/hibernate/dao/GenericDao.java
 /home/inex3/eclipse-workspace/SpringHibernate/src/main/java/spring/hibernate/entitymodel/Country.java
+/home/inex3/eclipse-workspace/SpringHibernate/src/main/java/spring/hibernate/entitymodel/Users.java
 /home/inex3/eclipse-workspace/SpringHibernate/src/main/java/spring/hibernate/service/CountryServiceImpl.java
-/home/inex3/eclipse-workspace/SpringHibernate/src/main/java/spring/hibernate/entitymodel/Student.java
 /home/inex3/eclipse-workspace/SpringHibernate/src/main/java/spring/hibernate/service/UserServiceImpl.java
 /home/inex3/eclipse-workspace/SpringHibernate/src/main/java/spring/hibernate/service/UserAddressServiceImpl.java
 /home/inex3/eclipse-workspace/SpringHibernate/src/main/java/spring/hibernate/entitymodel/Address.java
-/home/inex3/eclipse-workspace/SpringHibernate/src/main/java/spring/hibernate/entitymodel/User.java
 /home/inex3/eclipse-workspace/SpringHibernate/src/main/java/spring/hibernate/dao/GenericDaoImpl.java
 /home/inex3/eclipse-workspace/SpringHibernate/src/main/java/spring/hibernate/configuration/HibernateConfiguration.java
 /home/inex3/eclipse-workspace/SpringHibernate/src/main/java/spring/hibernate/service/UserService.java

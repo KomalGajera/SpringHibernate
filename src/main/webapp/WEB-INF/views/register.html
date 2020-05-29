@@ -39,6 +39,7 @@
             <div class="card card-4">
                 <div class="card-body">
                     <h2 class="title p-b-49" id="title">Registration Form</h2>
+                     <p th:text="${Message}"></p>
                     <form enctype="multipart/form-data" action="#" th:action="@{/saveuser}" th:object="${user}" method="post">
                      <input id="id" name="id" value="0" type="hidden">
                      <input name="length" id="length" type="hidden" >
@@ -111,8 +112,8 @@
                                 <div class="input-group">
                                     <label class="label">Birthday</label>
                                     <div class="input-group-icon">
-                                        <input class="input--style-4 js-datepicker" type="text" th:field="*{date}" id="birthdate"> <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
-                                   		 <span th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></span><br>
+                                        <input class="input--style-4 js-datepicker" type="text" th:field="*{dob}" id="birthdate"> <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                                   		 <span th:if="${#fields.hasErrors('dob')}" th:errors="*{dob}"></span><br>
                                     </div>
                                 </div>
                             </div>

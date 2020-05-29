@@ -12,8 +12,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.validation.Validator;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
@@ -33,7 +31,7 @@ public class FreemakerConfiguration implements  WebMvcConfigurer  {
 	
 
 	   @Autowired
-	   private ApplicationContext applicationContext;
+	   private ApplicationContext application;
 	
 	@Bean 
 	public FreeMarkerViewResolver freemarkerViewResolver() { 
@@ -47,9 +45,9 @@ public class FreemakerConfiguration implements  WebMvcConfigurer  {
 	
 	@Bean 
 	public FreeMarkerConfigurer freemarkerConfig() { 
-	    FreeMarkerConfigurer freeMarkerConfigurer = new FreeMarkerConfigurer(); 
-	    freeMarkerConfigurer.setTemplateLoaderPath("/WEB-INF/views/");
-	    return freeMarkerConfigurer; 
+	    FreeMarkerConfigurer freeMarker = new FreeMarkerConfigurer(); 
+	    freeMarker.setTemplateLoaderPath("/WEB-INF/views/");
+	    return freeMarker; 
 	}
 	 
 	@Override
@@ -66,7 +64,7 @@ public class FreemakerConfiguration implements  WebMvcConfigurer  {
 	   @Bean
 	   public SpringResourceTemplateResolver templateResolver() {
 	      SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
-	      templateResolver.setApplicationContext(applicationContext);
+	      templateResolver.setApplicationContext(application);
 	      templateResolver.setOrder(0);
 	      templateResolver.setPrefix("/WEB-INF/views/");
 	      templateResolver.setSuffix(".html");

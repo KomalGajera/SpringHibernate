@@ -5,15 +5,15 @@ import spring.hibernate.entitymodel.State;
 
 public interface StateService {
 	
-	public int save(State state);
+	int save(State state);
 	 
-    public List<State> getAllState();
+    List<State> getAllState();
  
-    public int deleteState(int stateId);
+    int deleteState(int stateId);
  
-    public State getState(int stateid);
+    State getState(int stateid);
 
-	public List<State> getAllStateByCountry(State state);
+	List<State> getAllStateByCountry(State state);
 	
 
 }

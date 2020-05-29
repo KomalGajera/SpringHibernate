@@ -1,13 +1,13 @@
 package spring.hibernate.dao;
 
 
-import spring.hibernate.entitymodel.User;
+import spring.hibernate.entitymodel.Users;
 
-public interface UserDao extends GenericDao<User> {
+public interface UserDao extends GenericDao<Users> {
 	
 	 
-	public int changepassword(User user);
+    int changepassword(Users user);
 
-	public User findUser(User user);
+	Users findUser(Users user);
 
 }

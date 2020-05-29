@@ -23,7 +23,8 @@ public class StateServiceImpl implements StateService {
 	@Override
 	public int save(State state) {
 		// TODO Auto-generated method stub
-		if(state.getState_id()==0)
+		LOGGER.info("save data");
+		if(state.getStateId()==0)
 		{
 			int status=dao.save(state);
 			return status;
@@ -37,12 +38,14 @@ public class StateServiceImpl implements StateService {
 	@Override
 	public List<State> getAllState() {
 		// TODO Auto-generated method stub
+		LOGGER.info("retrive state data..");
 		return dao.findAll(State.class);
 	}
 
 	@Override
 	public int deleteState(int stateId) {
 		// TODO Auto-generated method stub
+		LOGGER.info("delete state data");
 		return dao.delete(State.class, stateId);
 	}
 
@@ -50,12 +53,14 @@ public class StateServiceImpl implements StateService {
 	@Override
 	public State getState(int stateid) {
 		// TODO Auto-generated method stub
+		LOGGER.info("get state data");
 		return dao.getbyid(State.class,stateid);
 	}
 
 	@Override
 	public List<State> getAllStateByCountry(State state) {
 		// TODO Auto-generated method stub
+		LOGGER.info("get all state by country");
 		return dao.getAllStateByCountry(state);
 	}
 

@@ -10,7 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Proxy;
 
 @Entity
 @Table(name = "state")
@@ -20,30 +19,28 @@ public class State {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "state_id")
-	private int state_id;
+	private int stateId;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "country_id")
 	private Country country;
 	
 	@Column(name = "state_name")
-	private String state_name;
+	private String stateName;
 	
-	
-	public int getState_id() {
-		return state_id;
+	public int getStateId() {
+		return stateId;
 	}
-	public void setState_id(int state_id) {
-		this.state_id = state_id;
+	public void setStateId(int stateId) {
+		this.stateId = stateId;
 	}
-	public String getState_name() {
-		return state_name;
+
+	public String getStateName() {
+		return stateName;
 	}
-	public void setState_name(String state_name) {
-		this.state_name = state_name;
+	public void setStateName(String stateName) {
+		this.stateName = stateName;
 	}
-	
-	
 	public Country getCountry() {
 		return country;
 	}

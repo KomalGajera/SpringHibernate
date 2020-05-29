@@ -2,7 +2,6 @@ package spring.hibernate.controller;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,7 +15,6 @@ import javax.validation.Valid;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,7 +32,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import spring.hibernate.entitymodel.Address;
 import spring.hibernate.entitymodel.Country;
 import spring.hibernate.entitymodel.State;
-import spring.hibernate.entitymodel.User;
+import spring.hibernate.entitymodel.Users;
 import spring.hibernate.service.CountryService;
 import spring.hibernate.service.StateService;
 import spring.hibernate.service.UserAddressService;
@@ -65,7 +63,7 @@ public class UserController {
 	   
 	   @Autowired
 	   private HttpSession session;
-	 
+	
 	   /*this is use to maping the login page*/
 	   @GetMapping("/")
 	   public String login(Model model) {
@@ -107,11 +105,11 @@ public class UserController {
 	   @PostMapping(value="/countryadd")
 	   public String countryadd(@ModelAttribute("country") Country country,Model model) {		   	 
 			  int status=countryservice.save(country);
-			  if(status==1) {
+			  if(status!=0) {
 				  return "redirect:/addcountry";
 			  }else {
-				  model.addAttribute("error", "account is not valid");
-				   return "error";
+				  model.addAttribute("Message", "country does not add sucessfully..");
+				  return "addcountry";
 			  }
 			   
 			 
@@ -121,11 +119,11 @@ public class UserController {
 	   @RequestMapping(value = "/countrydelete/{country_id}", method = RequestMethod.DELETE, produces = "application/json")
 		public String deleteCountry(@PathVariable("country_id") int countryid,Model model) {
 	    	int status=countryservice.deleteCountry(countryid);
-	    	if(status==1) {
+	    	if(status!=0) {
 	    		return "addcountry";
 	    	}else {
-	    		 model.addAttribute("error", "account is not valid");
-				 return "error";
+	    		  model.addAttribute("Delete", "there is an error of delete country..");
+				  return "addcountry";
 	    	}
 	    	
 		}
@@ -174,14 +172,14 @@ public class UserController {
 	   /*this mapping is use to add new state to database*/ 
 	   @PostMapping(value="/stateadd")
 	   public String stateadd(@ModelAttribute("state") State state,@ModelAttribute("country") Country country,Model model) {			   	
-		   	 Country newcountry=countryservice.getCountryByName(country.getCountry_name());
+		   	 Country newcountry=countryservice.getCountryByName(country.getCountryName());
 		   	 state.setCountry(newcountry);
 		   	 int status=stateservice.save(state);
-		   	 if(status==1) {
+		   	 if(status!=0) {
 		   		return "redirect:/addstate";
 		   	 }else {
-		   		 model.addAttribute("error", "account is not valid");
-				 return "error";
+		   		 model.addAttribute("Message", "there is some error in state store/update");
+				 return "addstate";
 		   	 }
 			  
 			 
@@ -194,8 +192,8 @@ public class UserController {
 	    	if(status==1) {
 	    		return "addstate";
 	    	}else {
-	    		 model.addAttribute("error", "account is not valid");
-				   return "error";
+	    		 model.addAttribute("Delete", "there is some error of delete state");
+				   return "addstate";
 	    	}
 		   
 		}
@@ -205,13 +203,13 @@ public class UserController {
 	    
 	   /*this mapping is use to login user*/
 	   @PostMapping(value="/login")
-	   public String login(@ModelAttribute("user") User user,Model model) {
+	   public String login(@ModelAttribute("user") Users user,Model model) {
 		   
-		   User newuser=userservice.findUser(user);
+		   Users newuser=userservice.findUser(user);
 		   if(newuser!= null) {
 			   session.setAttribute("username",newuser.getFname());
 			   session.setAttribute("user",newuser.getRole());
-			   session.setAttribute("userid", newuser.getId());
+			   session.setAttribute("userid", newuser.getUserId());
 			   return "redirect:/showuser";
 			   
 		   }
@@ -240,23 +238,18 @@ public class UserController {
 	   
 	   /*this mapping is use to display register page*/
 	   @GetMapping("/register")
-	   public String register(User user) {
+	   public String register(Users user) {
 		   user.setGender("male");
 	        return "register";
 	   }
 	   
 	   /*this mapping is use to store user detail to database*/
 	   @PostMapping(value="/saveuser")
-	   public String register(@Valid User user,BindingResult result,@RequestParam CommonsMultipartFile[] fileUpload,Model model) {	
+	   public String register(@Valid Users user,BindingResult result,@RequestParam CommonsMultipartFile[] fileUpload,Model model) {	
 		   System.out.println("error:-"+result);		   
 		   if(result.hasErrors()) {
 			   return "register";
 		   }
-		   
-		   DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
-           String strDate = dateFormat.format(user.getDate());  
-           user.setDob(strDate);
-		   String hobby="  ";
 		   ArrayList<Address> address=new ArrayList<Address>();    
 		   if (fileUpload != null && fileUpload.length > 0) {
 	            for (CommonsMultipartFile aFile : fileUpload){            	
@@ -264,12 +257,16 @@ public class UserController {
 	                user.setData(aFile.getBytes());             
 	            }
 		   }
-		   for (String s : user.getUser_hobby()) {
-				 hobby=hobby+s+"  ";}	
-		   if(user.getId()==0) {
+		  
+		   StringBuffer buf = new StringBuffer();
+		   for (String s : user.getUserHobby()) {
+			   buf.append(s);}	
+		   String hobby = buf.toString();
+		   
+		   if(user.getUserId()==0) {
 			   for (String add : user.getAdd()) {
 			    	Address useradd=new Address();
-			    	useradd.setAddress(add);
+			    	useradd.setUserAddress(add);
 			    	useradd.setUser(user);
 			    	address.add(useradd);}
 			    user.setAddress(address);
@@ -281,7 +278,7 @@ public class UserController {
 			   for (String add : arr) {
 				   System.out.println("addresss:"+add);
 			    	Address useradd=new Address();
-			    	useradd.setAddress(add);
+			    	useradd.setUserAddress(add);
 			    	useradd.setUser(user);
 			    	address.add(useradd);}
 			    user.setAddress(address);
@@ -293,14 +290,15 @@ public class UserController {
 		    	 return "redirect:/";
 		    }
 		    else {
+		    	model.addAttribute("Message","there is some error of user store/update.");
 		    	return "register";
 		    }
 	   }
 	  
 	   /*this maping is use to get user information by user id*/
 	   @PostMapping(value = "/userbyid")
-		public @ResponseBody User getUser(	@RequestParam("id") int userid) {
-		   User user= userservice.getUserById(userid); 
+		public @ResponseBody Users getUser(	@RequestParam("id") int userid) {
+		   Users user= userservice.getUserById(userid); 
 		   List<Address> list=user.getAddress();
 		   int size=list.size();
 		   String arr[]=new String[size];
@@ -310,7 +308,7 @@ public class UserController {
 	       {  
 	    	  
 	    	   Address address=itr2.next();
-	    	   arr[count]=address.getAddress();
+	    	   arr[count]=address.getUserAddress();
 	    	   count++;
 			   
 		   }
@@ -323,8 +321,8 @@ public class UserController {
 		public @ResponseBody int checkUser(	@RequestParam("email") String email) {  
 		   
 		   int result=0;
-		   List<User> listUser = userservice.getAllUser();    
-		   for (User u : listUser) {
+		   List<Users> listUser = userservice.getAllUser();    
+		   for (Users u : listUser) {
 				 if(u.getEmail().equals(email)) {
 					 	result=1;
 					 }
@@ -336,7 +334,7 @@ public class UserController {
 	   /*this method is use to count total number of address for particular user*/
 	   @PostMapping(value = "/checkaddress")
 	 		public @ResponseBody int checkAddress(	@RequestParam("id") int userid) {	 		   
-			   User user= userservice.getUserById(userid); 
+			   Users user= userservice.getUserById(userid); 
 			   List<Address> list=user.getAddress();
 			   int size=list.size();
 			   return size;
@@ -345,8 +343,8 @@ public class UserController {
 	   
 	   /*this mapping is use to get all user from database*/
 	   @GetMapping(value = "/displayuser", produces = "application/json")
-		public @ResponseBody List<User> listUser() {
-	    	 List<User> listUser = userservice.getAllUser();    	
+		public @ResponseBody List<Users> listUser() {
+	    	 List<Users> listUser = userservice.getAllUser();    	
 		     return listUser;
 		} 
 	   
@@ -355,7 +353,7 @@ public class UserController {
 	   @GetMapping(value = "/image/{id}")
 		public void getStudentPhoto(HttpServletResponse response, @PathVariable("id") int userid) throws Exception {
 			response.setContentType("image/jpeg");
-			User user = userservice.getUserById(userid);
+			Users user = userservice.getUserById(userid);
 			byte[] bytes =user.getData();
 			InputStream inputStream = new ByteArrayInputStream(bytes);
 			IOUtils.copy(inputStream, response.getOutputStream());
@@ -368,15 +366,15 @@ public class UserController {
 	 	      if(status==1) {
 	 	    	 return "showuser";
 	 	      }else {
-	 	    	   model.addAttribute("error", "account is not valid");
-				   return "error";
+	 	    	   model.addAttribute("Delete", "There is some error of delete user");
+				   return "showuser";
 	 	      }
 	 		  
 	 	}   
 	   
 	   /*this mapping is use to change user current password to new password*/
 	   @PostMapping(value="/changepassword")
-	   public String password(@ModelAttribute("user") User user) {
+	   public String password(@ModelAttribute("user") Users user) {
 		   int status=userservice.changepassword(user);
 		    if(status!=0) {
 		    	 return "redirect:/";

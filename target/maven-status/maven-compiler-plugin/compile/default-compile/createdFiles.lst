@@ -2,10 +2,10 @@ spring/hibernate/service/CountryServiceImpl.class
 spring/hibernate/dao/CountryDao.class
 spring/hibernate/service/StateService.class
 spring/hibernate/configuration/MvcWebApplicationInitializer.class
-spring/hibernate/entitymodel/User.class
 spring/hibernate/dao/CountryDaoImpl.class
 spring/hibernate/dao/UserAddressDao.class
 spring/hibernate/entitymodel/Country.class
+spring/hibernate/entitymodel/Users.class
 spring/hibernate/service/UserAddressService.class
 spring/hibernate/configuration/FreemakerConfiguration.class
 spring/hibernate/service/UserAddressServiceImpl.class
@@ -19,7 +19,6 @@ spring/hibernate/controller/UserController.class
 spring/hibernate/configuration/ThymeleafConfiguration.class
 spring/hibernate/service/UserService.class
 spring/hibernate/dao/GenericDaoImpl.class
-spring/hibernate/entitymodel/Student.class
 spring/hibernate/service/UserServiceImpl.class
 spring/hibernate/dao/GenericDao.class
 spring/hibernate/dao/StateDaoImpl.class

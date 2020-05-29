@@ -39,6 +39,7 @@
             <div class="card card-4">
                 <div class="card-body">
                     <h2 class="title p-b-49" id="title">Registration Form</h2>
+                     <p th:text="${Message}"></p>
                     <form enctype="multipart/form-data" action="#" th:action="@{/saveuser}" th:object="${user}" method="post">
                      <input id="id" name="id" value="0" type="hidden">
                      <input name="length" id="length" type="hidden" >

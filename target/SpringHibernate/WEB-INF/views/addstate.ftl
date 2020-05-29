@@ -11,6 +11,7 @@
 <body>
 
 <#include "header.ftl">
+  <h1 class="error">  <#if Delete?exists>  ${Delete}  </#if>  </h1>
 <div class='table-container'>
    <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
@@ -50,8 +51,10 @@
  <div class="container" id="country12">
   <form action="stateadd" method="post">  
     <div class="form-group">
+     <h1 class="error">  <#if Message?exists>  ${Message}  </#if>  </h1>
+     <h1 class="error">  <#if Delete?exists>  ${Delete}  </#if>  </h1>
        <label class="label">Country</label>
-       <select name="country_name" id="selectcountry" class="form-control">
+       <select name="countryName" id="selectcountry" class="form-control">
 	   <option disabled="disabled" selected="selected" value="0">Choose Country</option>	
 	    <#--  <#list listCountry as u1>	
 		          <option value="${u1.getCountry_name()}">${u1.getCountry_name()}</option>			        
@@ -61,11 +64,11 @@
   </div>  
     <div class="form-group" id="main_stateid">
       <label for="stateid">county id:</label>
-      <input type="text" class="form-control" id="state_id" name="state_id" value="0">
+      <input type="text" class="form-control" id="state_id" name="stateId" value="0">
     </div> 
     <div class="form-group">
       <label for="country">Add State:</label>
-      <input type="text" class="form-control" id="state" placeholder="Enter state" name="state_name">
+      <input type="text" class="form-control" id="state" placeholder="Enter state" name="stateName">
     </div>    
     <button type="submit" class="btn btn-default">Submit</button>
   </form>

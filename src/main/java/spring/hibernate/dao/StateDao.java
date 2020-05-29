@@ -7,6 +7,6 @@ import spring.hibernate.entitymodel.State;
 public interface StateDao extends GenericDao<State> {
 	
 
-	public List<State> getAllStateByCountry(State state);
+	List<State> getAllStateByCountry(State state);
 
 }

@@ -11,7 +11,7 @@
 </body> -->
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 
 <head>
     <!-- Required meta tags-->

@@ -1,5 +1,6 @@
 package spring.hibernate.entitymodel;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,33 +16,36 @@ import org.hibernate.validator.constraints.Length;
 @Table(name="address") 
 public class Address {
 	
-    public User getUser() {
+    public Users getUser() {
 		return user;
 	}
-	public void setUser(User user) {
+	public void setUser(Users user) {
 		this.user = user;
 	}
 	@Id  
     @GeneratedValue(strategy=GenerationType.IDENTITY) 
-    private int id;   
+	@Column(name = "id", nullable = false)
+    private int addressId;   
+	
 	@Length(max=17,message = "enter maximum 17 character..")
-    private String Address;
+	@Column(name = "address", nullable = false)
+    private String userAddress;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id",updatable = false)
-	private User user;
+	private Users user;
     
-	public int getId() {
-		return id;
+    public int getAddressId() {
+		return addressId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setAddressId(int addressId) {
+		this.addressId = addressId;
 	}
-	public String getAddress() {
-		return Address;
+	public String getUserAddress() {
+		return userAddress;
 	}
-	public void setAddress(String address) {
-		Address = address;
-	}   
+	public void setUserAddress(String userAddress) {
+		this.userAddress = userAddress;
+	}
 
 }

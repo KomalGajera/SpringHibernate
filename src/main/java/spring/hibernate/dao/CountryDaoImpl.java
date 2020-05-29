@@ -39,7 +39,7 @@ public class CountryDaoImpl extends GenericDaoImpl<Country> implements CountryDa
 	    * @param countryname is use it contain countryname.
 	 */ 
 	@Override
-	public Country getCountryByName(String countryname) {
+	public	Country getCountryByName(String countryname) {
 		// TODO Auto-generated method stub
 		
 		Query query=null;
