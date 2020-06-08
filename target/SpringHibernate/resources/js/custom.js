@@ -10,14 +10,13 @@
           });
         },
         error: function(data) {
-            alert('woops!');
+            alert('there is not find country name!');
         } 
 	});
 	
 	var id = getUrlVars()["id"];	
 	if(id!=undefined)
 		{	
-		
 		
 		$.ajax({url: "checkaddress",type:'POST',data:'id='+id, 			
  	        success: function(list){   
@@ -40,7 +39,7 @@
  	        		 	         
  	        },
  	        error: function(data) {
- 	            alert('woops!');
+ 	            alert('there is an error while fetch user address..');
  	        } 
  		});
 		
@@ -65,7 +64,7 @@
             	$('#birthdate').val(value.dob);
             	$('#country').val(value.country);
             	$('<option selected="selected">').val(value.state).text(value.state).appendTo(select);
-            	$('#profileimg').attr('src',"image/"+value.id+"");
+            	$('#profileimg').attr('src',"image/"+value.userId+"");
             	if(value.gender=='female')
             	{
             		$("#female").attr('checked', 'checked');
@@ -90,7 +89,7 @@
             	
 	        },
 	        error: function(data) {
-	            alert('woops!');
+	            alert('User id is not valid please check the id.');
 	        } 
 		});
 	}
@@ -506,7 +505,7 @@
 	    	          });
 	    	        },
 	    	        error: function(data) {
-	    	            alert('woops!');
+	    	            alert('state name is not found!!!');
 	    	        } 
 	    		});
 	    	

@@ -15,6 +15,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 @Configuration
@@ -68,6 +69,11 @@ public class HibernateConfiguration {
 	       HibernateTransactionManager txManager = new HibernateTransactionManager();
 	       txManager.setSessionFactory(session);
 	       return txManager;
+	    }
+	    
+	    @Bean
+	    public MethodValidationPostProcessor methodValidationPostProcessor() {
+	        return new MethodValidationPostProcessor();
 	    }
 
 }

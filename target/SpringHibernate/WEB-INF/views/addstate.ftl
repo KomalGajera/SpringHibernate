@@ -75,12 +75,11 @@
 </div>
 
 		<#include "footer.ftl">
-        <script src='resources/js/jquery-3.3.1.js'></script>
-        <script src="resources/js/jquery-3.4.1.min.js"></script>
-        <script src="resources/js/popper.min.js"></script>
-        <script src="resources/js/bootstrap.min.js"></script>
+         <script src="resources/js/jquery-3.4.1.min.js"></script>      
         <script src='resources/js/jquery.dataTables.min.js'></script>
         <script src='resources/js/dataTables.bootstrap4.min.js'></script>
+        <script src="resources/js/popper.min.js"></script>
+        <script src="resources/js/bootstrap.min.js"></script>
          <script src='resources/js/show-state.js'></script> 
        
        <#-- <script>

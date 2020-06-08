@@ -24,7 +24,10 @@ $(document).ready(function() {
             		table.append("<tr><td>Address</td><td>"+value+"</td></tr>"); 
                 	
                 });
-	    }
+             
+	    },error: function(data) {
+	            alert('sorry id is not valid!!!');
+	        } 
 	    });
 	
 });

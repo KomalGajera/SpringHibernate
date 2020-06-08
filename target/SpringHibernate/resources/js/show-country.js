@@ -1,27 +1,29 @@
 $(document).ready(function() {
 	$('#main_countryid').hide();
-	var table = $("#example tbody");
-	 
+	var table = $("#example").DataTable();
+	
     $.ajax({
         url: 'displaycountry',
         type : "GET",
 		contentType : "application/json",
         success: function (data) {
-        	
+        	table.clear();
         	if(!data){
-        		alert("sorry there is error of display country..")
-        		
+        		alert("sorry there is error of display country..")        		
         	}
-        	else{
-        		table.empty();
-                $.each(data, function (key, value) {              	
+        	else{ 
+        		$.each(data, function (key, value) {   
                 	
-                    table.append("<tr><td>"+value.countryId+"</td>" +
+                	table.row.add([value['countryId'],
+                		value['countryName'],
+                		'<a href="#" onClick="$(this).update('+value['countryId']+')">update</a>',
+                		'<a href="#" onClick="$(this).deletecountry('+value['countryId']+')">delete</a>']).draw(true);
+                	
+                   /* table.append("<tr><td>"+value.countryId+"</td>" +
                         "<td>"+value.countryName+"</td>"+
                         "<td><a href='#' onClick='$(this).update("+value.countryId+")'>update</a></td>"+
-                        "<td><a href='#' onClick='$(this).deletecountry("+value.countryId+")'>delete</a></td></tr>");
+                        "<td><a href='#' onClick='$(this).deletecountry("+value.countryId+")'>delete</a></td></tr>");*/
                 }); 
-                $("#example").DataTable();
         		
         	}
            
@@ -48,11 +50,13 @@ $(document).ready(function() {
      }; 
      
      $.fn.deletecountry = function(paramater) {
+    	var deleterow= table.row($(this).closest("tr"));
      	$.ajax({    		
              url: 'countrydelete/'+paramater,
              type: "DELETE",
              success: function (data) {
-            	 window.location.reload();
+            	 deleterow.remove();
+            	 table.draw();
          }
          }); 
       }; 

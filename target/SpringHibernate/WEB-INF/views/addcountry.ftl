@@ -17,10 +17,11 @@
             <table id="example" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>City Name</th>
-                        <th>Update</th>
-                        <th>Delete</th>
+                        <th>countryId</th>
+                        <th>countryName</th>
+                        <th>update</th>
+                        <th>delete</th>
+                      
                     </tr>
                 </thead>
                 <tbody>
@@ -36,10 +37,11 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th>ID</th>
-                        <th>City Name</th>
-                        <th>Update</th>
-                        <th>Delete</th>
+                        <th>countryId</th>
+                        <th>countryName</th>
+                        <th>update</th>
+                        <th>delete</th>
+                      
                     </tr>
                 </tfoot>
             </table>
@@ -64,20 +66,18 @@
             </form>
         </div>
 		</fieldset>
+		
+		
+			
         <#include "footer.ftl">
-        <script src='resources/js/jquery-3.3.1.js'></script>
-        <script src="resources/js/jquery-3.4.1.min.js"></script>
-        <script src="resources/js/popper.min.js"></script>
-        <script src="resources/js/bootstrap.min.js"></script>
+         <#--  <script src='resources/js/jquery-3.3.1.js'></script> -->  
+      <script src="resources/js/jquery-3.4.1.min.js"></script>      
         <script src='resources/js/jquery.dataTables.min.js'></script>
         <script src='resources/js/dataTables.bootstrap4.min.js'></script>
-        <script src='resources/js/show-country.js'></script>
-        <#--  <script>
-  $(function(){
-  	$('#main_countryid').hide();
-    $("#example").dataTable();
-  })
-  </script> -->
+        <script src="resources/js/popper.min.js"></script>
+        <script src="resources/js/bootstrap.min.js"></script>
+         <script src='resources/js/show-country.js'></script> 
+   
 </body>
 
 </html>

@@ -32,7 +32,7 @@ public class UserAddressDaoImpl implements UserAddressDao {
 		String address[]=add.getUser().getAdd();
 		
 		ArrayList<String> newaddress=new ArrayList<String>();
-		Query query = getSession().createQuery("SELECT a.Address FROM Address a WHERE user_id=:user_id");
+		Query query = getSession().createQuery("SELECT a.userAddress FROM Address a WHERE user_id=:user_id");
 		query.setParameter("user_id", add.getUser().getUserId());
 		ArrayList<String>  oldaddress= (ArrayList<String>) query.list();
 		
@@ -55,11 +55,11 @@ public class UserAddressDaoImpl implements UserAddressDao {
     		String old=oldaddress.get(0);
     		String newadd=newaddress.get(0);
     		LOGGER.info("\n\n\n\n update time");
-    		Query find = getSession().createQuery("SELECT a.id FROM Address a WHERE a.Address = :address and user_id=:user_id ");
+    		Query find = getSession().createQuery("SELECT a.addressId FROM Address a WHERE a.userAddress = :address and user_id=:user_id ");
 			find.setParameter("address", old);
 			find.setParameter("user_id",add.getUser().getUserId());
 			int addressid=(int) find.list().get(0);
-			Query update = getSession().createQuery("update Address a set a.Address=:address where a.id=:id");
+			Query update = getSession().createQuery("update userAddress a set a.userAddress=:address where a.addressId=:id");
 			update.setParameter("address", newadd);
 			update.setParameter("id", addressid);
 			update.executeUpdate();

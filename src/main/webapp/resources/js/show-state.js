@@ -1,30 +1,33 @@
 
 $(document).ready(function() {
-	
-	
-	
 	$('#main_stateid').hide();
-	var table = $("#example tbody");
+	var table = $("#example").DataTable();
 	 
     $.ajax({
         url: 'displaystate',
         type: "GET",
         contentType : "application/json",
         success: function (data) {
-        	
+        	var abc=JSON.stringify(data);
+        	table.clear();
         	if(!data){
         		alert("sorry there is error of display state..")
         		
         	}else{
-            table.empty();
-            $.each(data, function (key, value) {
-            	table.append("<tr><td>"+value.stateId+"</td>" +
+        		 
+           
+        		 $.each(data, function (key, value) {
+        			 table.row.add([value['stateId'],
+            		value.country.countryName,value['stateName'],
+            		'<a href="#" onClick="$(this).update('+value['stateId']+')">update</a>',
+            		'<a href="#" onClick="$(this).deletestate('+value['stateId']+')">delete</a>']).draw(true);
+            	
+            	  /* table.append("<tr><td>"+value.stateId+"</td>" +
                 		"<td>"+value.country.countryName+"</td>"+
                 		"<td>"+value.stateName+"</td>"+
                 		"<td><a href='#' onClick='$(this).update("+value.stateId+")'>update</a></td>"+
-                    "<td><a href='#' onClick='$(this).deletestate("+value.stateId+")'>delete</a></td></tr>");
+                    "<td><a href='#' onClick='$(this).deletestate("+value.stateId+")'>delete</a></td></tr>");*/
             }); 
-            $("#example").DataTable();
         	}
         }
     });
@@ -51,11 +54,13 @@ $(document).ready(function() {
      };
      
      $.fn.deletestate = function(paramater) {
+    	 var deleterow= table.row($(this).closest("tr"));
      	$.ajax({    		
              url: 'statedelete/'+paramater,
              type: "DELETE",
              success: function (data) {
-            	 window.location.reload(); 
+            	 deleterow.remove();
+            	 table.draw();
          },
      	error: function(data) {
             alert('woops!');
@@ -75,5 +80,24 @@ $(document).ready(function() {
 	});     
 });
 
-
+/*var table=$('#example').DataTable( {
+ ajax: abc,
+ columns: [
+     { "data": "stateId" },
+     { "data": "country.countryName" },
+     { "data": "stateName" },
+     {
+         mRender: function (data, type, row) {
+             return '<a href="#" onClick="$(this).update('+value['stateId']+')">update</a>'
+         }
+     },
+      DELETE  {
+         mRender: function (data, type, row) {
+             return '<a href="#" onClick="$(this).deletestate('+value['stateId']+')">delete</a>'
+         }
+     }     
+ ],
+paging: false,
+searching: false
+} ).draw(true);*/
 

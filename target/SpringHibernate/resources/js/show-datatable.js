@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	
-	var table = $("#example tbody");
+	var table = $("#example tbody").dataTable();
 	 
     $.ajax({
         url: 'displayuser',
@@ -53,7 +53,7 @@ $(document).ready(function() {
             	}    	
             	
             });    
-            $("#example").DataTable();
+          
         	}
         },
         error: function(data) {

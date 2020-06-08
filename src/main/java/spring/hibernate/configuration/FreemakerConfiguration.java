@@ -91,24 +91,13 @@ public class FreemakerConfiguration implements  WebMvcConfigurer  {
 	      resolver.setTemplateEngine(templateEngine());
 	      registry.viewResolver(resolver);
 	   }
-	   
-	 
-	   
-	   @Bean
-	     public CacheManager cacheManager() {
-	         // configure and return an implementation of Spring's CacheManager SPI
-	         SimpleCacheManager cacheManager = new SimpleCacheManager();
-	         cacheManager.setCaches(Arrays.asList(new ConcurrentMapCache("default")));
-	         return cacheManager;
-	     }
-	   
 	
-	@Bean
-	   public MessageSource messageSource() {
-	      ResourceBundleMessageSource source = new ResourceBundleMessageSource();
-	      source.setBasename("messages");
-	      return source;
-	   }
+		@Bean
+		   public MessageSource messageSource() {
+		      ResourceBundleMessageSource source = new ResourceBundleMessageSource();
+		      source.setBasename("messages");
+		      return source;
+		   }
 
 	
 }

@@ -12,7 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -30,14 +33,15 @@ public class Users {
 	private int userId;
 	
 	@Column(name = "fname", nullable = false)
-	@Size(max = 20, min = 3, message = "enter maximum 3 character..")
+	@Size(max = 20, min = 3, message = "{fname.size.invalid}")
 	@NotNull
-	@Pattern(regexp="^[a-zA-Z]{3,15}$",message = "enter only character")
+	@Pattern(regexp="^[a-zA-Z]{3,15}$",message = "{fname.pattern.invalid}")
 	private String fname;
 	
 	@Column(name = "lname", nullable = false)
-	@Size(max = 20, min = 3, message = "enter maximum 3 character..")
+	@Size(max = 20, min = 3, message = "{fname.size.invalid}")
 	@NotNull
+	@Pattern(regexp="^[a-zA-Z]{3,15}$",message = "{fname.pattern.invalid}")
 	private String  lname;
 	
 	@Column(name = "fileName")
@@ -47,21 +51,20 @@ public class Users {
 	private byte[] data;
 	
     @Column(name = "email", nullable = false)
-    @Email(message="please enter valid email address..")
+    @Email(message="email.pattern.invalid")
 	private String  email;
     
-	@Column(name = "number", nullable = false)
-	//@Size(min=10,max=10,message = "please enter valid number")	
+	@Column(name = "number", nullable = false)	
+	@Max(value = 10,message="{number.invalid}")
+	@Min(value=10,message="{number.invalid}")
 	private long number;
     
 	@Column(name = "password", nullable = false)
-	@Pattern(regexp="^([a-zA-Z0-9@*#]{8,15})$",message = "enter only character")
+	@Pattern(regexp="^([a-zA-Z0-9@*#]{8,15})$",message = "{password.pattern.invalid}")
 	private String  password;
-
-
-
+	
 	@Column(name = "dob", nullable = false)
-	//@PastOrPresent(message = "not future date allow..")
+	@NotNull(message = "{dob.invalid}")
 	private String dob;
 	
 	@Column(name = "gender", nullable = false)
@@ -78,22 +81,23 @@ public class Users {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.EAGER) 	
+	@Valid
 	private List<Address> address;  
 		
 	
 	@Column(name = "country", nullable = false)
-	@NotNull(message = "please select country..")
+	@NotNull(message = "{country.invalid}")
 	private String country;
 	 
 	
 	@Column(name = "state", nullable = false)
-	@NotNull(message = "please select state..")
+	@NotNull(message = "{state.invalid}")
 	private String state;
 	 
 	
 	 
 	@Column(name = "role", nullable = false)
-	private String role;
+	private String role="user";
 	
 
 
